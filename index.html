@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+      <title>Side by side map</title>
+      <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body id="body" onload="">
+    <table id="side-by-side">
+      <tr>
+        <td class="map-container">
+          <div id="left_map_canvas_div">
+            <div class="year" id="left-year"><span>&lsaquo;</span>&nbsp;&nbsp;2000</div>
+            <div id="left_map_canvas"></div>
+          </div>
+        </td>
+        <td>
+          <div id="center-divider"></div>
+        </td>
+        <td class="map-container">
+          <div id="right_map_canvas_div">
+            <div class="year" id="right-year">2010&nbsp;&nbsp;<span>&rsaquo;</span></div>
+            <div id="right_map_canvas"></div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("jquery", "1.6.4");
+    </script>
+    <script type="text/javascript" src="http://demos.flesler.com/jquery/scrollTo/js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="side_by_side.js"></script>
+  </body>
+</html>
