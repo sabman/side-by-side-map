@@ -8,20 +8,21 @@ $(document).ready(function() {
   var center = new google.maps.LatLng(32.321, -86.900);
   var zoom = 8;
   map_options = {
-          zoom: zoom,
-          center: center,
-          zoomControl: true,
-          minZoom: 7,
-          maxZoom: 11,
-          mapTypeControl: false,
-          mapTypeId: "simple"
-      };
+    zoom: zoom,
+    center: center,
+    zoomControl: true,
+    minZoom: 7,
+    maxZoom: 11,
+    mapTypeControl: false,
+    mapTypeId: "simple"
+  };
   var initial_hash = window.location.hash;
   simpleLeft = new google.maps.StyledMapType(backdrop_styles, { name: "resource demographics" });
   simpleRight = new google.maps.StyledMapType(backdrop_styles, { name: "resource demographics" });
 
   left_map = new google.maps.Map(document.getElementById("left_map_canvas"), map_options);
   left_map.mapTypes.set("simple", simpleLeft);
+  left_map.overlayMapTypes.push(make_tile_layer('https://s3.amazonaws.com/saburq_tiles/'));
 
   map_options.zoomControl = false;
   map_options.panControl = false;
@@ -60,6 +61,17 @@ $(document).ready(function() {
   });
 
 }); // $(document).ready
+
+function make_tile_layer(tile_prefix){
+  options = {
+    getTileUrl: function(coord, zoom) {
+      return tile_prefix + zoom + "/" + coord.x + "/" + coord.y + ".png";
+    },
+    tileSize: new google.maps.Size(256, 256),
+    isPng: true
+  }
+  return new google.maps.ImageMapType(options);
+}
 
 function make_hash(map) {
   var parts = [map.getCenter().lat(), map.getCenter().lng(), map.getZoom(), current_resource]
